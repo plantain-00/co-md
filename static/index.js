@@ -9,6 +9,23 @@ $(function () {
         }
     }, 1000);
 
+    var vue = new Vue({
+        el: "#toolbar",
+        data: {
+            profile: null
+        }
+    });
+
+    fetch("/user", {
+        credentials: 'same-origin'
+    }).then(function (response) {
+        return response.json()
+    }).then(function (json) {
+        vue.profile = json;
+    }).catch(function (error) {
+        console.log(error)
+    });
+
     var sync = _.debounce(function () {
         console.log(editor.session.getValue());
     }, 512, false)

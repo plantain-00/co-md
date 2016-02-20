@@ -4,6 +4,7 @@ import * as express from "express";
 import * as passport from "passport";
 const session = require("express-session");
 const GitHubStrategy = require("passport-github").Strategy;
+import * as moment from "moment";
 
 import * as settings from "./settings";
 
@@ -19,7 +20,6 @@ const strategy = new GitHubStrategy({
     clientID: settings.githubClientID,
     clientSecret: settings.githubClientSecret
 }, (accessToken, refreshToken, profile, done) => {
-    console.log(profile);
     process.nextTick(function() {
         return done(null, profile);
     });
@@ -53,6 +53,10 @@ app.get("/auth/github/callback",
 app.get("/logout", function(req, res) {
     req.logout();
     res.redirect("/");
+});
+
+app.get("/user", function(req, res) {
+    res.json(req.user);
 });
 
 app.listen(settings.port);

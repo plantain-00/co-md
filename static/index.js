@@ -8,4 +8,10 @@ $(function () {
             $('.ui-layout-east').scrollTop($(window.location.hash).offset().top - 30); // scroll to hash element
         }
     }, 1000);
+
+    var sync = _.debounce(function () {
+        console.log(editor.session.getValue());
+    }, 512, false)
+
+    editor.session.on('change', sync);
 });

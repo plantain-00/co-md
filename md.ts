@@ -3,7 +3,7 @@
 import * as express from "express";
 import * as passport from "passport";
 const session = require("express-session");
-const GitHubStrategy = require("passport-github2").Strategy;
+const GitHubStrategy = require("passport-github").Strategy;
 
 import * as settings from "./settings";
 
@@ -17,9 +17,9 @@ passport.deserializeUser(function(obj, done) {
 
 const strategy = new GitHubStrategy({
     clientID: settings.githubClientID,
-    clientSecret: settings.githubClientSecret,
-    callbackURL: settings.callbackURL
+    clientSecret: settings.githubClientSecret
 }, (accessToken, refreshToken, profile, done) => {
+    console.log(profile);
     process.nextTick(function() {
         return done(null, profile);
     });

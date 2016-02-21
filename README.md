@@ -5,9 +5,19 @@
 # co-md
 The source code of a markdown online editor with cooperation.
 
-In development now.
-
-# tools and global npm packages
+## tools and global npm packages
 
 + node.js >=4
 + typescript
+
+## develop
+
++ `npm install`
++ `tsc`
++ `node md.js`
+
+## usage
+
++ login with Github
++ input an unique string as a room name, then share the string with others
++ click `connect`

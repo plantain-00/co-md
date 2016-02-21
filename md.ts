@@ -73,16 +73,20 @@ function ensureAuthenticated(req, res, next) {
 }
 
 const io = socketIO(server);
-const text = io.of("/text");
+const textNamespace = io.of("/text");
 
-text.use(function(socket, next) {
+textNamespace.use(function(socket, next) {
     sessionMiddleware(socket.request, {}, next);
 }).on("connection", socket => {
     if (socket.request.session.passport === undefined) {
         socket.disconnect(true);
     } else {
+        const user = socket.request.session.passport.user;
         socket.on("text changed", text => {
-            console.log(text);
+            textNamespace.emit("text changed", {
+                userId: user.id,
+                text: text
+            })
         });
     }
 });

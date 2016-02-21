@@ -27,14 +27,14 @@ $(function () {
     });
 
     var sync = _.debounce(function () {
-        console.log(editor.session.getValue());
+        socket.emit("text changed", editor.session.getValue());
     }, 512, false)
 
     editor.session.on('change', sync);
 
-    socket.on("text", text => {
-        console.log(text);
+    socket.on("text changed", data => {
+        if (data.userId !== vue.profile.id) {
+            editor.session.setValue(data.text);
+        }
     });
-
-    socket.emit("text changed", "test");
 });

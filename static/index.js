@@ -10,9 +10,19 @@ $(function () {
     }, 1000);
 
     var vue = new Vue({
-        el: "#toolbar",
+        el: "#vue",
         data: {
-            profile: null
+            profile: null,
+            room: "",
+            roomEditing: ""
+        },
+        methods: {
+            connect: function () {
+                if (this.roomEditing) {
+                    this.room = this.roomEditing.trim();
+                    socket.emit("enter", this.room);
+                }
+            }
         }
     });
 
@@ -27,7 +37,12 @@ $(function () {
     });
 
     var sync = _.debounce(function () {
-        socket.emit("text changed", editor.session.getValue());
+        if (vue.room) {
+            socket.emit("text changed", {
+                text: editor.session.getValue(),
+                room: vue.room
+            });
+        }
     }, 512, false)
 
     editor.session.on('change', sync);

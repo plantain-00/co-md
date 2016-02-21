@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html id="vue">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>{{room || "stand-alone"}}</title>
     <link rel="stylesheet" href="dist/markdown-plus.min.css" />
 </head>
 
@@ -67,6 +67,10 @@ T3: 2014-01-02, 9d"></i>
             <a v-show="!profile" href="auth/github"><i title="Github" class="fa fa-github"></i></a>
             <span v-show="profile">{{profile.displayName}}</span>
             <a v-show="profile" href="logout"><i title="logout" class="fa fa-sign-out"></i></a>
+            <span v-show="profile">
+                <input type="text" v-model="roomEditing">
+                <button @click="connect()">connect</button>
+            </span>
         </div>
     </div>
     <div class="ui-layout-center">
@@ -197,7 +201,7 @@ https://cdn.example.com/file2.js"></textarea>
     <script src="https://cdn.bootcss.com/fetch/0.11.0/fetch.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        var socket = io("http://localhost:9990/text");
+        var socket = io("https://md.yorkyao.xyz/text");
     </script>
     <script src="index.js"></script>
 </body>

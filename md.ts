@@ -82,11 +82,16 @@ textNamespace.use(function(socket, next) {
         socket.disconnect(true);
     } else {
         const user = socket.request.session.passport.user;
-        socket.on("text changed", text => {
-            textNamespace.emit("text changed", {
-                userId: user.id,
-                text: text
-            })
+        socket.on("text changed", data => {
+            textNamespace.to(data.room)
+                .emit("text changed", {
+                    userId: user.id,
+                    text: data.text
+                })
+        });
+        socket.on("enter", text => {
+            socket.leaveAll()
+            socket.join(text);
         });
     }
 });

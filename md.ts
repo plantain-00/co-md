@@ -30,11 +30,13 @@ passport.use(strategy);
 
 const app = express();
 
-app.use(session({
+const sessionMiddleware = session({
     secret: settings.sessionSecret,
     resave: false,
     saveUninitialized: false
-}));
+});
+
+app.use(sessionMiddleware);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -73,6 +75,14 @@ function ensureAuthenticated(req, res, next) {
 const io = socketIO(server);
 const text = io.of("/text");
 
-text.on("connection", socket => {
-    console.log(socket.handshake.headers.cookie);
+text.use(function(socket, next) {
+    sessionMiddleware(socket.request, {}, next);
+}).on("connection", socket => {
+    if (socket.request.session.passport === undefined) {
+        socket.disconnect(true);
+    } else {
+        socket.on("text changed", text => {
+            console.log(text);
+        });
+    }
 });

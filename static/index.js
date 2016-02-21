@@ -35,4 +35,6 @@ $(function () {
     socket.on("text", text => {
         console.log(text);
     });
+
+    socket.emit("text changed", "test");
 });

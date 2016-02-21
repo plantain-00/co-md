@@ -36,7 +36,13 @@ $(function () {
         console.log(error)
     });
 
+    var changed = true;
+
     var sync = _.debounce(function () {
+        if (!changed) {
+            changed = true;
+            return;
+        }
         if (vue.room) {
             socket.emit("text changed", {
                 text: editor.session.getValue(),
@@ -49,6 +55,7 @@ $(function () {
 
     socket.on("text changed", data => {
         if (data.userId !== vue.profile.id) {
+            changed = false;
             editor.session.setValue(data.text);
         }
     });

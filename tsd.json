@@ -9,7 +9,7 @@
       "commit": "95b7178e0ef33b4b88327676418b4cc3ad61df0f"
     },
     "node/node.d.ts": {
-      "commit": "95b7178e0ef33b4b88327676418b4cc3ad61df0f"
+      "commit": "95433230a9913054c57c715e6b91a9ae738d0b97"
     },
     "serve-static/serve-static.d.ts": {
       "commit": "95b7178e0ef33b4b88327676418b4cc3ad61df0f"
@@ -28,6 +28,9 @@
     },
     "moment/moment-node.d.ts": {
       "commit": "95b7178e0ef33b4b88327676418b4cc3ad61df0f"
+    },
+    "socket.io/socket.io.d.ts": {
+      "commit": "95433230a9913054c57c715e6b91a9ae738d0b97"
     }
   }
 }

@@ -5,6 +5,7 @@ import * as passport from "passport";
 const session = require("express-session");
 const GitHubStrategy = require("passport-github").Strategy;
 import * as moment from "moment";
+import * as socketIO from "socket.io";
 
 import * as settings from "./settings";
 
@@ -59,10 +60,19 @@ app.get("/user", function(req, res) {
     res.json(req.user);
 });
 
-app.listen(settings.port);
+const server = app.listen(settings.port);
 console.log(`listening ${settings.port}`);
 
 function ensureAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) { return next(); }
+    if (req.isAuthenticated()) {
+        return next();
+    }
     res.redirect('/login')
 }
+
+const io = socketIO(server);
+const text = io.of("/text");
+
+text.on("connection", socket => {
+    console.log(socket.handshake.headers.cookie);
+});

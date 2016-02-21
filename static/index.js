@@ -31,4 +31,8 @@ $(function () {
     }, 512, false)
 
     editor.session.on('change', sync);
+
+    socket.on("text", text => {
+        console.log(text);
+    });
 });

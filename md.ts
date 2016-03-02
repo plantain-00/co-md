@@ -78,6 +78,7 @@ const textNamespace = io.of("/text");
 const rooms = new Map<string, string[]>();
 
 function leave(socket: SocketIO.Socket) {
+    console.log(socket.rooms);
     if (socket.rooms && socket.rooms.length > 0) {
         const room = socket.rooms[0];
         if (rooms.has(room)) {

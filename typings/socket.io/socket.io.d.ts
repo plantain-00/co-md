@@ -535,7 +535,7 @@ declare module SocketIO {
 		 * The list of rooms that this Socket is currently in, where
 		 * the ID the the room ID
 		 */
-		rooms: { [id: string]: string };
+		rooms: string[];
 		
 		/**
 		 * Is the Socket currently connected?

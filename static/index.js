@@ -14,7 +14,8 @@ $(function () {
         data: {
             profile: null,
             room: "",
-            roomEditing: ""
+            roomEditing: "",
+            count: 0,
         },
         methods: {
             connect: function () {
@@ -58,5 +59,8 @@ $(function () {
             changed = false;
             editor.session.setValue(data.text);
         }
+    });
+    socket.on("people count changed", count => {
+        vue.count = count;
     });
 });

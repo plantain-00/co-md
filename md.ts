@@ -78,15 +78,17 @@ const textNamespace = io.of("/text");
 const rooms = new Map<string, string[]>();
 
 function leave(socket: SocketIO.Socket) {
-    console.log(socket.rooms);
-    if (socket.rooms && socket.rooms.length > 0) {
-        const room = socket.rooms[0];
-        if (rooms.has(room)) {
-            const sockets = rooms.get(room);
-            const index = sockets.findIndex(s => s === socket.id);
-            if (index !== -1) {
-                sockets.splice(index, 1);
-                textNamespace.to(room).emit("people count changed", sockets.length);
+    if (socket.rooms) {
+        const keys = Object.keys(socket.rooms);
+        if (keys.length > 0) {
+            const room = socket.rooms[0];
+            if (rooms.has(room)) {
+                const sockets = rooms.get(room);
+                const index = sockets.findIndex(s => s === socket.id);
+                if (index !== -1) {
+                    sockets.splice(index, 1);
+                    textNamespace.to(room).emit("people count changed", sockets.length);
+                }
             }
         }
     }

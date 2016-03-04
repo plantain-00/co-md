@@ -75,23 +75,17 @@ function ensureAuthenticated(req, res, next) {
 const io = socketIO(server);
 const textNamespace = io.of("/text");
 
-const rooms = new Map<string, string[]>();
+// room name -> socket id array
+const socketIds = new Map<string, string[]>();
 
-function leave(socket: SocketIO.Socket) {
-    if (socket.rooms) {
-        const keys = Object.keys(socket.rooms);
-        if (keys.length > 0) {
-            const room = socket.rooms[0];
-            if (rooms.has(room)) {
-                const sockets = rooms.get(room);
-                const index = sockets.findIndex(s => s === socket.id);
-                if (index !== -1) {
-                    sockets.splice(index, 1);
-                    textNamespace.to(room).emit("people count changed", sockets.length);
-                }
-            }
+function leaveAll(socketId: string) {
+    socketIds.forEach((ids, room) => {
+        const index = ids.findIndex(s => s === socketId);
+        if (index !== -1) {
+            ids.splice(index, 1);
+            textNamespace.to(room).emit("people count changed", ids.length);
         }
-    }
+    });
 }
 
 textNamespace.use(function(socket, next) {
@@ -109,21 +103,22 @@ textNamespace.use(function(socket, next) {
                 })
         });
         socket.on("enter", text => {
-            leave(socket);
-            socket.leaveAll()
+            socket.leaveAll();
+            leaveAll(socket.id);
+
             socket.join(text);
-            if (!rooms.has(text)) {
-                rooms.set(text, [socket.id]);
+            if (!socketIds.has(text)) {
+                socketIds.set(text, [socket.id]);
             } else {
-                const sockets = rooms.get(text);
+                const sockets = socketIds.get(text);
                 if (sockets.findIndex(s => s === socket.id) === -1) {
                     sockets.push(socket.id);
                 }
             }
-            textNamespace.to(text).emit("people count changed", rooms.get(text).length);
+            textNamespace.to(text).emit("people count changed", socketIds.get(text).length);
         });
-        socket.on("disconnect", text => {
-            leave(socket);
+        socket.on("disconnect", () => {
+            leaveAll(socket.id);
         });
     }
 });

@@ -1,11 +1,4 @@
-export let githubClientID: string;
-export let githubClientSecret: string;
-export let sessionSecret: string;
+export let githubClientID: string = process.env.CO_MD_GITHUB_CLIENT_ID;
+export let githubClientSecret: string = process.env.CO_MD_GITHUB_CLIENT_SECRET;
+export let sessionSecret: string = process.env.CO_MD_GITHUB_SESSION_SECRET;
 export const port = 9990;
-
-try {
-    const secret = require("./secret");
-    secret.load();
-} catch (e) {
-    console.log(e);
-}

@@ -9,10 +9,12 @@ The source code of a markdown online editor with cooperation.
 
 + node.js >=4
 + typescript
++ tsd
 
 ## develop
 
 + `npm install`
++ `tsd install`
 + `tsc`
 + `node md.js`
 

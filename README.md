@@ -7,7 +7,6 @@ The source code of a markdown online editor with cooperation.
 
 ## tools and global npm packages
 
-+ node.js >=4
 + typescript
 + tsd
 

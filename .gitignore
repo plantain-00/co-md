@@ -37,3 +37,4 @@ typings
 tsconfig.json
 tsd.json
 .travis.yml
+README.md

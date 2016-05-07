@@ -2,9 +2,10 @@
   "name": "co-md",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "md.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tslint": "tslint '*.ts'",
+    "check": "npm-check -u"
   },
   "repository": {
     "type": "git",

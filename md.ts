@@ -69,7 +69,7 @@ function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
-    res.redirect('/login')
+    res.redirect("/login");
 }
 
 const io = socketIO(server);
@@ -100,7 +100,7 @@ textNamespace.use(function(socket, next) {
                 .emit("text changed", {
                     userId: user.id,
                     text: data.text
-                })
+                });
         });
         socket.on("enter", text => {
             socket.leaveAll();

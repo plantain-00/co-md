@@ -7,12 +7,11 @@ The source code of a markdown online editor with cooperation.
 
 ## tools and global npm packages
 
-+ `npm i -g typescript tsd check-npm pm2`
++ `npm run init`
 
 ## develop
 
-+ `npm i`
-+ `tsd install`
++ `npm run restore`
 + `tsc`
 + `npm run tslint`
 + `node md.js`

@@ -11,7 +11,7 @@ The source code of a markdown online editor with cooperation.
 
 ## develop
 
-+ `npm run restore`
++ `npm i`
 + `tsc`
 + `npm run tslint`
 + `node md.js`

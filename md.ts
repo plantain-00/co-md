@@ -37,7 +37,11 @@ app.use(sessionMiddleware);
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(__dirname + "/static"));
+app.use(express.static(__dirname + "/static", {
+    setHeaders: (res, path, stat) => {
+        res.setHeader("Content-Security-Policy", "default-src *;script-src 'self';style-src 'self' 'unsafe-inline' 'unsafe-eval';font-src 'self' data:;img-src 'self' data:;connect-src 'self' md.yorkyao.xyz wss://md.yorkyao.xyz");
+    }
+}));
 
 app.get("/auth/github",
     passport.authenticate("github", { scope: [] }),

@@ -5,7 +5,7 @@
   "main": "md.js",
   "scripts": {
     "tslint": "tslint '*.ts'",
-    "init": "npm i -g typescript@beta tslint npm-check"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "@types/express-session": "0.0.28",
     "@types/passport": "^0.2.27",
     "@types/socket.io": "^1.4.26",
+    "tslint": "^3.14.0",
     "typescript": "^2.0.0"
   }
 }

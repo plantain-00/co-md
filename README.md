@@ -5,14 +5,10 @@
 # co-md
 The source code of a markdown online editor with cooperation.
 
-## tools and global npm packages
-
-+ `npm run init`
-
 ## develop
 
 + `npm i`
-+ `tsc`
++ `npm run build`
 + `npm run tslint`
 + `node md.js`
 

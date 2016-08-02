@@ -1,3 +1,4 @@
+var socket = io("https://md.yorkyao.xyz/text");
 $(function () {
     editor.session.setValue("", -1);
     setTimeout(function () {

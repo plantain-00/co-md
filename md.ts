@@ -6,11 +6,11 @@ import * as socketIO from "socket.io";
 
 import * as settings from "./settings";
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
     done(null, user);
 });
 
-passport.deserializeUser(function (obj, done) {
+passport.deserializeUser((obj, done) => {
     done(null, obj);
 });
 
@@ -18,7 +18,7 @@ const strategy = new GitHubStrategy({
     clientID: settings.githubClientID,
     clientSecret: settings.githubClientSecret,
 }, (accessToken: string, refreshToken: string, profile: string, done: Function) => {
-    process.nextTick(function () {
+    process.nextTick(() => {
         return done(null, profile);
     });
 });
@@ -43,24 +43,20 @@ app.use(express.static(__dirname + "/static", {
     },
 }));
 
-app.get("/auth/github",
-    passport.authenticate("github", { scope: [] }),
-    function (req, res) {
-        // todo
-    });
+app.get("/auth/github", passport.authenticate("github", { scope: [] }), (req, res) => {
+    // todo
+});
 
-app.get("/auth/github/callback",
-    passport.authenticate("github", { failureRedirect: "/" }),
-    function (req, res) {
-        res.redirect("/");
-    });
+app.get("/auth/github/callback", passport.authenticate("github", { failureRedirect: "/" }), (req, res) => {
+    res.redirect("/");
+});
 
-app.get("/logout", function (req, res) {
+app.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/");
 });
 
-app.get("/user", function (req, res) {
+app.get("/user", (req, res) => {
     res.json(req.user);
 });
 
@@ -88,7 +84,7 @@ type Text = {
     room: string;
 }
 
-textNamespace.use(function (socket, next) {
+textNamespace.use((socket, next) => {
     sessionMiddleware(socket.request, {} as any, next);
 }).on("connection", socket => {
     if (socket.request.session.passport === undefined) {

@@ -18,21 +18,21 @@
   },
   "homepage": "https://github.com/plantain-00/co-md#readme",
   "dependencies": {
-    "express": "^4.13.4",
-    "express-session": "^1.13.0",
+    "express": "^4.14.0",
+    "express-session": "^1.14.1",
     "passport": "^0.3.2",
     "passport-github": "^1.1.0",
-    "socket.io": "^1.4.6"
+    "socket.io": "^1.4.8"
   },
   "engines": {
     "node": ">=6.0.0"
   },
   "devDependencies": {
-    "@types/express": "^4.0.29",
-    "@types/express-session": "0.0.28",
-    "@types/passport": "^0.2.27",
+    "@types/express": "^4.0.32",
+    "@types/express-session": "0.0.30",
+    "@types/passport": "^0.2.30",
     "@types/socket.io": "^1.4.26",
-    "tslint": "^3.14.0",
-    "typescript": "^2.0.0"
+    "tslint": "^3.15.1",
+    "typescript": "^2.0.2"
   }
 }

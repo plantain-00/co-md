@@ -82,7 +82,7 @@ function leaveAll(socketId: string) {
 type Text = {
     text: string;
     room: string;
-}
+};
 
 textNamespace.use((socket, next) => {
     sessionMiddleware(socket.request, {} as any, next);

@@ -22,7 +22,7 @@
     "express-session": "^1.14.2",
     "passport": "^0.3.2",
     "passport-github": "^1.1.0",
-    "socket.io": "^1.5.1"
+    "socket.io": "^1.6.0"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -32,7 +32,7 @@
     "@types/express-session": "0.0.30",
     "@types/passport": "^0.2.30",
     "@types/socket.io": "^1.4.26",
-    "tslint": "^3.15.1",
-    "typescript": "^2.0.8"
+    "tslint": "^4.0.1",
+    "typescript": "^2.0.10"
   }
 }

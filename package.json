@@ -5,13 +5,14 @@
   "main": "md.js",
   "scripts": {
     "tslint": "tslint '*.ts'",
-    "build": "tsc"
+    "build": "tsc",
+    "rev": "rev-static"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plantain-00/co-md.git"
   },
-  "author": "yao",
+  "author": "York Yao",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/plantain-00/co-md/issues"
@@ -32,6 +33,7 @@
     "@types/express-session": "0.0.32",
     "@types/passport": "0.2.35",
     "@types/socket.io": "1.4.27",
+    "rev-static": "^1.3.1",
     "tslint": "4.0.2",
     "typescript": "2.1.4"
   }

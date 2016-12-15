@@ -1,0 +1,14 @@
+{
+    "inputFiles": [
+        "static/index.js",
+        "static/index.ejs.html"
+    ],
+    "outputFiles": [
+        "static/index.html"
+    ],
+    "json": false,
+    "ejsOptions": {
+        "rmWhitespace": true
+    },
+    "sha": 256
+}
